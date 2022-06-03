@@ -1,7 +1,6 @@
 '''
 test kafka producer with orjson
 '''
-import logging
 import signal
 import sys
 from multiprocessing import Event, JoinableQueue, Process
