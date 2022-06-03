@@ -1,0 +1,201 @@
+{
+  "key": "HEL-TSF-20220707-20220808-1653617546291-1653173094545-1652977407821",
+  "prices_ow_dep": {
+    "ADT": {
+      "currencyCode": "USD",
+      "price": 255.21,
+      "seatsStatus": "LIMITED",
+      "tax": 50.56,
+      "totalPrice": 305.77
+    },
+    "ALL": {
+      "currencyCode": "USD",
+      "price": 459.41,
+      "seatsStatus": "ENOUGH",
+      "tax": 101.12,
+      "totalPrice": 560.53
+    },
+    "CHD": {
+      "currencyCode": "USD",
+      "price": 204.2,
+      "seatsStatus": "LIMITED",
+      "tax": 50.56,
+      "totalPrice": 254.76
+    },
+    "INF": {
+      "price": 0.0,
+      "tax": 0.0,
+      "totalPrice": 0.0
+    }
+  },
+  "prices_ow_ret": {
+    "ADT": {
+      "currencyCode": "USD",
+      "price": 259.11,
+      "seatsStatus": "LIMITED",
+      "tax": 57.84,
+      "totalPrice": 316.95
+    },
+    "ALL": {
+      "currencyCode": "USD",
+      "price": 467.2,
+      "seatsStatus": "ENOUGH",
+      "tax": 110.2,
+      "totalPrice": 577.4
+    },
+    "CHD": {
+      "currencyCode": "USD",
+      "price": 208.09,
+      "seatsStatus": "LIMITED",
+      "tax": 52.36,
+      "totalPrice": 260.45
+    },
+    "INF": {
+      "price": 0.0,
+      "tax": 0.0,
+      "totalPrice": 0.0
+    }
+  },
+  "request_ow_dep": {
+    "adultAmount": 1,
+    "childAmount": 1,
+    "fareClass": "Economy",
+    "infantAmount": 0,
+    "queries": [
+      {
+        "arrAirport": "TSF",
+        "date": "20220707",
+        "depAirport": "HEL"
+      }
+    ],
+    "supplier": "YIQUFEI",
+    "timestamp": 1653173094545,
+    "tripType": "OW"
+  },
+  "request_ow_ret": {
+    "adultAmount": 1,
+    "childAmount": 1,
+    "fareClass": "Economy",
+    "infantAmount": 0,
+    "queries": [
+      {
+        "arrAirport": "HEL",
+        "date": "20220808",
+        "depAirport": "TSF"
+      }
+    ],
+    "supplier": "YIQUFEI",
+    "timestamp": 1652977407821,
+    "tripType": "OW"
+  },
+  "request_rt": {
+    "adultAmount": 1,
+    "childAmount": 1,
+    "fareClass": "Economy",
+    "infantAmount": 0,
+    "queries": [
+      {
+        "arrAirport": "TSF",
+        "date": "20220707",
+        "depAirport": "HEL"
+      },
+      {
+        "arrAirport": "HEL",
+        "date": "20220808",
+        "depAirport": "TSF"
+      }
+    ],
+    "supplier": "YIQUFEI",
+    "timestamp": 1653617546291,
+    "tripType": "RT"
+  },
+  "trip_rt": {
+    "extended": {
+      "yiqufei.search.data": "D_05271012_5E4BBC3E0B47F349_60"
+    },
+    "flights": [
+      {
+        "segments": [
+          {
+            "arriveDate": "20220707",
+            "arriveTime": "19:45",
+            "carrier": "KL",
+            "depDate": "20220707",
+            "depTime": "18:10",
+            "dstAirport": "AMS",
+            "fareClass": "Economy",
+            "flightNo": "KL1170",
+            "orgAirport": "HEL"
+          },
+          {
+            "arriveDate": "20220708",
+            "arriveTime": "13:25",
+            "carrier": "KL",
+            "depDate": "20220708",
+            "depTime": "11:45",
+            "dstAirport": "VCE",
+            "fareClass": "Economy",
+            "flightNo": "KL1653",
+            "orgAirport": "AMS"
+          }
+        ]
+      },
+      {
+        "segments": [
+          {
+            "arriveDate": "20220808",
+            "arriveTime": "17:05",
+            "carrier": "AF",
+            "depDate": "20220808",
+            "depTime": "15:15",
+            "dstAirport": "CDG",
+            "fareClass": "Economy",
+            "flightNo": "AF1727",
+            "orgAirport": "VCE"
+          },
+          {
+            "arriveDate": "20220808",
+            "arriveTime": "23:30",
+            "carrier": "AF",
+            "depDate": "20220808",
+            "depTime": "19:30",
+            "dstAirport": "HEL",
+            "fareClass": "Economy",
+            "flightNo": "AF1176",
+            "orgAirport": "CDG"
+          }
+        ]
+      }
+    ],
+    "prices": {
+      "ADT": {
+        "currencyCode": "USD",
+        "price": 458.5,
+        "seatsStatus": "LIMITED",
+        "tax": 110.84,
+        "totalPrice": 569.34
+      },
+      "ALL": {
+        "currencyCode": "USD",
+        "price": 826.04,
+        "seatsStatus": "ENOUGH",
+        "tax": 216.19,
+        "totalPrice": 1042.23
+      },
+      "CHD": {
+        "currencyCode": "USD",
+        "price": 367.54,
+        "seatsStatus": "LIMITED",
+        "tax": 105.35,
+        "totalPrice": 472.89
+      },
+      "INF": {
+        "currencyCode": null,
+        "price": 0.0,
+        "seatsStatus": null,
+        "tax": 0.0,
+        "totalPrice": 0.0
+      }
+    }
+  }
+}
