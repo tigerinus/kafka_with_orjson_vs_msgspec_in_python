@@ -5,6 +5,12 @@ This project is to help profiling memory usage of the [Kafka](https://kafka.apac
 - `orjson`
 - `msgspec`
 
+## Usage
+
+```bash
+python test_<serializer>.py [-h] [--kafka-bootstrap-server KAFKA_BOOTSTRAP_SERVER] --count COUNT --kafka-topic KAFKA_TOPIC
+```
+
 ## Setup
 
 ### Python Virutal Environment
