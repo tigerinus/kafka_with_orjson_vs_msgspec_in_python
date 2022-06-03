@@ -1,7 +1,6 @@
 '''
 test kafka producer with orjson
 '''
-import argparse
 import logging
 import signal
 import sys
@@ -14,42 +13,7 @@ from msgspec import MsgspecError, json
 from kafka_producer import KafkaProducerService
 from logger import log
 from structs import PreparedData, Request
-
-
-def _build_argument_parser():
-    parser = argparse.ArgumentParser(
-        description='a kafka producer with orjson'
-    )
-
-    parser.add_argument(
-        '--kafka-bootstrap-server', '-s',
-        type=str,
-        default='localhost:9092',
-        help='a comma-separated list of kafka bootstrap servers (default: "localhost:9092")'
-    )
-
-    parser.add_argument(
-        '--count', '-c',
-        type=int,
-        required=True,
-        help='number of messages to produce'
-    )
-
-    parser.add_argument(
-        '--kafka-topic', '-t',
-        type=str,
-        required=True,
-        help='kafka topic for prepared data'
-    )
-
-    parser.add_argument(
-        '--debug', '-d',
-        action='store_true',
-        help='enable debug mode'
-    )
-
-    return parser
-
+from common import build_argument_parser
 
 def build_header(request: Request, extra_headers: dict = None) -> dict:
     '''
@@ -120,7 +84,7 @@ def _kafka_producer_worker(
 
 if __name__ == '__main__':
 
-    argument_parser = _build_argument_parser()
+    argument_parser = build_argument_parser('msgspec')
     args = argument_parser.parse_args()
 
     if args.debug:
