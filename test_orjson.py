@@ -7,12 +7,13 @@ import sys
 from multiprocessing import Event, JoinableQueue, Process
 from queue import Empty
 
-from confluent_kafka import KafkaException
 import orjson as json
+from confluent_kafka import KafkaException
 
+from common import build_argument_parser
+from kafka_admin import KafkaAdminService
 from kafka_producer import KafkaProducerService
 from logger import log
-from common import build_argument_parser
 
 
 def build_header(request: dict, extra_headers: dict = None) -> dict:
@@ -31,6 +32,7 @@ def build_header(request: dict, extra_headers: dict = None) -> dict:
 
 
 def _kafka_producer_worker(
+    ready_event: Event,
     terminate_event: Event,
     kafka_producer_queue: JoinableQueue,
     bootstrap_server: str
@@ -38,6 +40,11 @@ def _kafka_producer_worker(
 
     signal.signal(signal.SIGTERM, lambda signum, frame: terminate_event.set())
     signal.signal(signal.SIGINT, lambda signum, frame: terminate_event.set())
+
+    admin_service = KafkaAdminService(bootstrap_server=bootstrap_server)
+    admin_service.create_topic(topic=args.kafka_topic)
+
+    ready_event.set()
 
     log.info('kafka_producer_worker is started.')
     producer_service = KafkaProducerService(
@@ -66,7 +73,7 @@ def _kafka_producer_worker(
         try:
             producer_service.publish(
                 key=data["key"],
-                value=json.dumps(data), # pylint: disable=no-member
+                value=json.dumps(data),  # pylint: disable=no-member
                 headers=build_header(data["request_rt"])
             )
         except RuntimeError as error:
@@ -80,6 +87,7 @@ def _kafka_producer_worker(
 
     sys.exit(0)
 
+
 if __name__ == '__main__':
 
     argument_parser = build_argument_parser('orjson')
@@ -89,6 +97,7 @@ if __name__ == '__main__':
         log.info('debug mode is enabled')
         log.setLevel(logging.DEBUG)
 
+    _ready_event = Event()
     _terminate_event = Event()
 
     _kafka_producer_queue = JoinableQueue(maxsize=10)
@@ -96,6 +105,7 @@ if __name__ == '__main__':
         name='KafkaProducerWorker',
         target=_kafka_producer_worker,
         args=(
+            _ready_event,
             _terminate_event,
             _kafka_producer_queue,
             args.kafka_bootstrap_server,
@@ -110,6 +120,8 @@ if __name__ == '__main__':
         _terminate_event.set()
         kafka_producer_worker.terminate()
         sys.exit(1)
+
+    _ready_event.wait()
 
     COUNT = 0
     try:
