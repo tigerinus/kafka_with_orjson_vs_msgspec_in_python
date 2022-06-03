@@ -34,9 +34,9 @@ docker run -d --name=kafka --network host -e KAFKA_ZOOKEEPER_CONNECT=localhost:2
 ## Run
 
 ```bash
-PYTHONMALLOC=malloc memray run --follow-fork test_orjson.py -s localhost:9092 -t test -c 49999
+PYTHONMALLOC=malloc memray run --follow-fork test_orjson.py -s localhost:9092 -t test -c 99999
 
-PYTHONMALLOC=malloc memray run --follow-fork test_msgspec.py -s localhost:9092 -t test -c 49999
+PYTHONMALLOC=malloc memray run --follow-fork test_msgspec.py -s localhost:9092 -t test -c 99999
 ```
 
 ## Results
