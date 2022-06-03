@@ -120,7 +120,7 @@ if __name__ == '__main__':
     COUNT = 0
     try:
         while not _terminate_event.is_set or COUNT < args.count:
-            prepared_data.key += str(COUNT)
+            prepared_data.key = str(COUNT)
             COUNT += 1
             _kafka_producer_queue.put(prepared_data)
     finally:
