@@ -34,6 +34,12 @@ class KafkaProducerService:
                 f"The topic '{self.__topic}' does not exist in Kafka. Create the topic first."
             )
 
+    def close(self) -> None:
+        '''
+        close producer
+        '''
+        self.__producer.flush()
+
     def publish(self, key: str, value: bytes, headers: dict) -> None:
         '''
         publish message

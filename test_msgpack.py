@@ -113,6 +113,10 @@ def _kafka_producer_worker(
         finally:
             kafka_producer_queue.task_done()
 
+    producer_service.close()
+    log.info('kafka_producer_worker is terminated.')
+
+    sys.exit(0)
 
 if __name__ == '__main__':
 
@@ -155,6 +159,6 @@ if __name__ == '__main__':
 
     finally:
         _terminate_event.set()
-        kafka_producer_worker.terminate()
 
     log.info('done.')
+    sys.exit(0)
