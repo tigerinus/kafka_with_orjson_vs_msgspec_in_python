@@ -34,10 +34,4 @@ def build_argument_parser(name: str):
         help='kafka topic for prepared data'
     )
 
-    parser.add_argument(
-        '--debug', '-d',
-        action='store_true',
-        help='enable debug mode'
-    )
-
     return parser

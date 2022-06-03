@@ -70,7 +70,6 @@ def _kafka_producer_worker(
         try:
             data: PreparedData = kafka_producer_queue.get(timeout=1)
         except Empty:
-            log.debug('kafka_producer_queue is empty.')
             continue
 
         try:
@@ -88,17 +87,10 @@ def _kafka_producer_worker(
     producer_service.close()
     log.info('kafka_producer_worker is terminated.')
 
-    sys.exit(0)
-
-
 if __name__ == '__main__':
 
     argument_parser = build_argument_parser('msgspec')
     args = argument_parser.parse_args()
-
-    if args.debug:
-        log.info('debug mode is enabled')
-        log.setLevel(logging.DEBUG)
 
     _ready_event = Event()
     _terminate_event = Event()
@@ -121,21 +113,18 @@ if __name__ == '__main__':
             prepared_data = json.decode(f.read(), type=PreparedData)
     except (MsgspecError, FileNotFoundError):
         _terminate_event.set()
-        kafka_producer_worker.terminate()
+        _kafka_producer_queue.close()
         sys.exit(1)
 
     _ready_event.wait()
 
     COUNT = 0
     try:
-        while COUNT < args.count:
+        while not _terminate_event.is_set or COUNT < args.count:
             prepared_data.key += str(COUNT)
             COUNT += 1
-
             _kafka_producer_queue.put(prepared_data)
-
     finally:
         _terminate_event.set()
-
-    log.info('done.')
-    sys.exit(0)
+        _kafka_producer_queue.close()
+        log.info('done.')
